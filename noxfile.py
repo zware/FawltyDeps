@@ -1,11 +1,15 @@
 import hashlib
 import os
+import shutil
 from pathlib import Path
 from typing import Iterable
 
 import nox
 
 python_versions = ["3.7", "3.8", "3.9", "3.10", "3.11", "3.12"]
+
+# Use 'uv' to manager Nox' virtualenvs, if available
+nox.options.default_venv_backend = "uv" if shutil.which("uv") else "none"
 
 
 def patch_binaries_if_needed(session: nox.Session, venv_dir: str) -> None:
@@ -76,11 +80,12 @@ def install_groups(
         hashfile.write_text(digest)
 
     session.install("-r", str(requirements_txt))
-    if include_self:
-        session.install("-e", ".")
 
     if not session.virtualenv._reused:  # noqa: SLF001
         patch_binaries_if_needed(session, session.virtualenv.location)
+
+    if include_self:
+        session.install("-e", ".")
 
 
 @nox.session(python=python_versions)
