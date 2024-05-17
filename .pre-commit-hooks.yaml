@@ -12,4 +12,4 @@
     entry: fawltydeps --check-unused --detailed
     language: python
     args: [--deps]
-    files: "(.*requirements.*\\.(txt|in)|pyproject\\.toml|setup\\.(py|cfg))"
+    files: "(.*requirements.*\\.(txt|in)|pyproject\\.toml|setup\\.(py|cfg))$"
