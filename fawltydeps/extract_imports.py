@@ -196,7 +196,7 @@ def parse_source(
         )
     )
 
-    if src.path.suffix == ".py":
+    if src.path.suffix in {"", ".py"}:
         logger.info("Parsing Python file %s", src.path)
         return parse_python_file(src.path, local_context)
     if src.path.suffix == ".ipynb":

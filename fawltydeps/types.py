@@ -92,7 +92,7 @@ class CodeSource(Source):
                     ctx="Code path to parse is neither dir nor file",
                     path=self.path,
                 )
-            if self.path.suffix not in {".py", ".ipynb"}:
+            if self.path.suffix not in {"", ".py", ".ipynb"}:
                 raise UnparseablePathError(
                     ctx="Supported formats are .py and .ipynb; Cannot parse code",
                     path=self.path,
